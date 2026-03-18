@@ -5,8 +5,11 @@ import { glob } from 'glob'
 // export default defineConfig({
 //   plugins: [pluginReact()],
 // });
+// @ts-ignore
 export default defineConfig(async () => {
-  const entryFiles = await glob('./src/pages/**/index.{ts,tsx,js,jsx}')
+  const entryFiles = await glob('./src/pages/**/index.{ts,tsx,js,jsx}', {
+    ignore: ['**/store/**', '**/components/**', '**/utils/**', '**/hooks/**'],
+  })
   const templates = Object.fromEntries(
     entryFiles.map(file => {
       const entryName = path.basename(path.dirname(file))
