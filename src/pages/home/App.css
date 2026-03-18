@@ -1,26 +1,84 @@
 body {
   margin: 0;
-
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-
 }
 
-.content {
-  display: flex;
-  min-height: 100vh;
-  line-height: 1.1;
-  text-align: center;
-  flex-direction: column;
-  justify-content: center;
+.bg-blob {
+  position: absolute;
+  width: 42vmax;
+  height: 42vmax;
+  border-radius: 9999px;
+  filter: blur(72px);
+  opacity: 0.46;
+  mix-blend-mode: screen;
 }
 
-.content h1 {
-  font-size: 3.6rem;
-  font-weight: 700;
+.blob-a {
+  left: -12vmax;
+  top: -10vmax;
+  background: radial-gradient(circle, rgba(245, 99, 213, 0.8) 0%, rgba(245, 99, 213, 0) 70%);
+  animation: float-a 18s ease-in-out infinite alternate;
 }
 
-.content p {
-  font-size: 1.2rem;
-  font-weight: 400;
-  opacity: 0.5;
+.blob-b {
+  right: -14vmax;
+  top: -8vmax;
+  background: radial-gradient(circle, rgba(113, 111, 255, 0.75) 0%, rgba(113, 111, 255, 0) 72%);
+  animation: float-b 16s ease-in-out infinite alternate;
+}
+
+.blob-c {
+  left: 28%;
+  bottom: -20vmax;
+  background: radial-gradient(circle, rgba(255, 140, 92, 0.7) 0%, rgba(255, 140, 92, 0) 72%);
+  animation: float-c 20s ease-in-out infinite alternate;
+}
+
+.bg-grid {
+  position: absolute;
+  inset: -50% -20% 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 34px 34px;
+  opacity: 0.1;
+  transform: perspective(460px) rotateX(54deg);
+  transform-origin: top;
+  animation: grid-drift 18s linear infinite;
+}
+
+@keyframes float-a {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(12%, 8%, 0) scale(1.12);
+  }
+}
+
+@keyframes float-b {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(-12%, 12%, 0) scale(1.08);
+  }
+}
+
+@keyframes float-c {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(-5%, -10%, 0) scale(1.14);
+  }
+}
+
+@keyframes grid-drift {
+  from {
+    transform: perspective(460px) rotateX(54deg) translateY(0);
+  }
+  to {
+    transform: perspective(460px) rotateX(54deg) translateY(34px);
+  }
 }

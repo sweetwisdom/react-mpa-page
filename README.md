@@ -1,6 +1,10 @@
 # Rsbuild project mpa
 
 
+
+![image-20260318105754788](.imgs/image-20260318105754788.png)
+
+
 ## 项目概述
 
 这是一个基于 Rsbuild 的 React 多页面应用(MPA)项目。使用 TypeScript 和 pnpm 作为包管理器,lucide-react作为图标库。
