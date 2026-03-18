@@ -10,7 +10,7 @@ const App = () => {
     setCount(c => c - 1)
   }
   return (
-    <div className="content">
+    <div className="content text-purple-400">
       <h1>Rsbuild with React</h1>
       <p>Start building amazing things with Rsbuild.</p>
       <p>count is {count}</p>
