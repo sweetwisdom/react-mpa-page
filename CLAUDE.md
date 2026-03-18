@@ -4,13 +4,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 项目概述
 
-这是一个基于 Rsbuild 的 React 多页面应用(MPA)项目。使用 TypeScript 和 pnpm 作为包管理器。
+这是一个基于 Rsbuild 的 React 多页面应用(MPA)项目。使用 TypeScript 和 pnpm 作为包管理器，lucide-react作为图标库。
 
 ## 核心架构
 
 ### 多页面入口机制
 
-项目使用动态入口配置(rsbuild.config.ts:8-15),自动扫描 `src/pages/**/index.{ts,tsx,js,jsx}` 文件作为独立入口点。每个页面文件夹结构:
+项目使用动态入口配置(rsbuild.config.ts),自动扫描 `src/pages/**/index.{ts,tsx,js,jsx}` 文件作为独立入口点。每个页面文件夹结构:
 
 ```
 src/pages/
@@ -55,3 +55,8 @@ pnpm preview
 - 严格模式启用
 - ESNext 模块系统
 - 使用 `react-jsx` 转换
+
+## Tailwind CSS
+
+- 支持 `tailwindcss`，版本：3.4.19 ，已接入 PostCSS。
+- 引入方式：在 `src/style/common.css` 添加 `@tailwind base;`、`@tailwind components;`、`@tailwind utilities;` 并在 `tailwind.config.js` 配置 `content`。
