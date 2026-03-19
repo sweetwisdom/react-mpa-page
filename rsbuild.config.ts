@@ -2,11 +2,16 @@ import { defineConfig } from '@rsbuild/core'
 import { pluginReact } from '@rsbuild/plugin-react'
 import path from 'node:path'
 import { glob } from 'glob'
+import { codeInspectorPlugin } from 'code-inspector-plugin'
+
 // export default defineConfig({
 //   plugins: [pluginReact()],
 // });
+
 // @ts-ignore
 export default defineConfig(async () => {
+  const isProd = process.env.NODE_ENV === 'production'
+  
   const entryFiles = await glob('./src/pages/**/index.{ts,tsx,js,jsx}', {
     ignore: ['**/store/**', '**/components/**', '**/utils/**', '**/hooks/**'],
   })
@@ -17,6 +22,7 @@ export default defineConfig(async () => {
     })
   )
   console.log('⚠️:[ entryFiles ]🎈：', entryFiles)
+  const inject = isProd ? 'body' : 'head' //解决单页html 无法打开的
 
   return {
     root: './',
@@ -27,7 +33,8 @@ export default defineConfig(async () => {
     },
     plugins: [pluginReact()],
     html: {
-      inject: 'body', //解决单页html 无法打开的
+      inject: inject, //解决单页html 无法打开的
+      // inject:'body'
     },
     server: {
       host: 'localhost',
@@ -37,13 +44,23 @@ export default defineConfig(async () => {
     output: {
       assetPrefix: './',
       legalComments: 'none', //移除开源注释
-      // inlineScripts: true,
-      // inlineStyles: true,
+      inlineScripts: true,
+      inlineStyles: true,
     },
 
     performance: {
       chunkSplit: {
         strategy: 'all-in-one',
+      },
+    },
+    tools: {
+      rspack: {
+        plugins: [
+          codeInspectorPlugin({
+            bundler: 'rspack',
+            showSwitch: true,
+          }),
+        ],
       },
     },
   }
